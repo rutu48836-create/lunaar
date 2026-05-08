@@ -1,0 +1,352 @@
+
+body{
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.Products_Page_wrapper{
+    display:flex;
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    overflow-y: scroll;
+    gap: 10px;
+    background: #0f0f0f;
+    flex-direction: column;
+    scrollbar-width: thin;
+}
+
+
+  .Product_Page_Main_content_wrapper{
+    width: 100%;
+    min-width: auto;
+    display:flex;
+    gap:8px;
+  }
+
+.New_Product_Wrapper{
+    overflow-y: hidden;
+    position: relative;
+    border: 1px solid black;
+    flex: 1;
+    max-width: 96vw;
+    min-height: 94vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-right: 10px;
+    margin-top: 20px;
+    padding-left: 3rem; 
+    background: #fff;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: #000;
+}
+
+.New_Product_Wrapper h2{
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.New_Product_Wrapper span{
+    font-size: 13px;
+    color: #817c7c;
+}
+
+.New_Product_form_wrapper{
+    width:100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.New_Product_form{
+    z-index: 9999;
+    width: 34%;
+    height: 460px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: .6rem;
+    min-height: 0;  
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;    margin-top: 20px;
+    border-radius: 12px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    background: #fff;
+}
+
+label{
+    margin-bottom: 14px;
+}
+
+input{
+    min-width: 90%;
+    padding:.6rem;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    font-size: 12px;
+    border: none;
+    font-family: "Inter",sans-serif;
+}
+
+textarea{
+    min-width: 90%;
+    height: 46px;
+    padding: .6rem;
+    font-family: "Inter",sans-serif;
+    font-size: 12px;
+    border-radius: 8px;
+    border: none;
+    resize: none;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.Image_Preview_Grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.Preview_Item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.Preview_Img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.Remove_Btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #0e0d0d;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.New_Product_form button{
+    display: flex;
+    place-self: center;
+    width: 95%;
+    padding: .6rem;
+    background: black;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    font-family: "Inter",sans-serif;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+
+.New_product_header{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_cta{
+    flex:1;
+}
+
+.header_btn_wrapper{
+    flex:1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header_btn_wrapper button{
+    margin-right: 20px;
+    padding: .8rem;
+    width: 150px;
+    border: none;
+    background: #000;
+    color: #fff;
+    font-family: "Inter",sans-serif;
+    border-radius: 12px;
+}
+
+.Product_list {
+    width: 95%;
+    min-height: 480px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.product_card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    height:auto;
+    max-height: 400px;
+}
+
+.product_card:hover {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 24px;
+}
+
+.product_card_img_wrapper {
+    width: 100%;
+    min-height: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    border: none;
+}
+
+.product_card_img_wrapper img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.product_card:hover .product_card_img_wrapper img {
+    transform: scale(1.04);
+}
+
+.product_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px 14px;
+    gap: 4px;
+}
+
+.product_info h3 {
+    font-size: 14px;
+    font-weight: 520;
+    margin: 0;
+    color: #111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product_info span {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+}
+
+.btn_wrapper {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+}
+
+.btn_wrapper button {
+    flex: 1;
+    padding: 6px 0;
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    color: #111;
+    font-weight: 500;
+    transition: background 0.15s ease;
+}
+
+.btn_wrapper button:first-child:hover {
+    background: #f5f5f5;
+}
+
+.btn_wrapper button:last-child {
+    border-color: #ffd5d5;
+    color: #c0392b;
+    margin-right: 25px;
+}
+
+.btn_wrapper button:last-child:hover {
+    background: #fff5f5;
+}
+
+@media (max-width:768px){
+
+   .New_Product_Wrapper{
+    padding: 0;
+    padding-left: 0;
+    display: flex;
+    place-self: center;
+     width: 98vw;
+    max-width: 96vw;
+    margin-top: 20px;
+   }
+
+    .Product_list {
+    width: 100%;
+    min-height: 480px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.product_card{
+    width: 96%;
+}
+
+.New_product_header h2{
+    margin-left: 10px;
+}
+
+.New_product_header span{
+    margin-left: 10px;
+}
+
+.New_Product_form{
+    width: 90%;
+    place-self: flex-start;
+    justify-self: flex-start;
+    overflow-y: hidden;
+    left: 0;
+    margin-right: 10px;
+}
+
+
+}

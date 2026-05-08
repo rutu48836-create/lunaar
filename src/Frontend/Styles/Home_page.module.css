@@ -1,0 +1,143 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+html,body{
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    color: black;
+}
+
+.Home_page_wrapper{
+  overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    background: #000;
+}
+
+.Hero_section{
+    width: 100%;
+    max-height: auto;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    min-height: 400px;
+    gap: 150px;
+}
+
+.CTA_wrapper{
+    width: 40%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2.8rem;
+}
+
+.CTA_wrapper h1{
+  font-family: 'Playfair Display', serif;
+width: 100%;
+      font-size: 74px;
+      font-weight:10;
+      color: #ccc;
+      margin-bottom: 0;
+}
+
+.CTA_wrapper span{
+    color: #757373;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    width: 80%;
+    line-height: 1.4rem;
+}
+
+.CTA_btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 30px;
+    gap: 8px;
+}
+
+.ghost {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #aaa5a5;
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.ghost:hover {
+  color: #fff;
+}
+
+.primary {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #000;
+  background: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+.primary:hover {
+  opacity: 0.85;
+}
+
+.animation_wrapper{
+    width: 40%;
+    max-width: 50%;
+    max-height: auto;
+    min-height: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation_wrapper img{
+margin-top: 50px;    
+width: 100%;
+height: 400px;
+display: flex;
+object-fit: cover;
+}
+
+ @media(max-width:768px){
+  .Hero_section{
+    flex-direction: column;
+    gap:0px;
+  }
+
+  .CTA_wrapper{
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .CTA_wrapper h1{
+    font-size: 58px;
+  }
+
+  .animation_wrapper{
+    width: 100%;
+    max-width: 100%;
+  }
+
+ }
+

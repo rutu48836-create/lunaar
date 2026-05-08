@@ -1,0 +1,289 @@
+/* page.module.css — reusable layout for Lunaar static pages */
+/* Usage: import styles from "../Styles/page.module.css" */
+
+/* ── Page shell ── */
+.page_wrapper {
+    width: 100vw;
+    min-height: 100vh;
+    background: #0a0a0a;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-family: "DM Sans", sans-serif;
+}
+
+/* ── Content container ── */
+.page_content {
+    max-width: 740px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+    flex: 1;
+}
+
+/* ── Beta banner ── */
+.beta_banner {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: #8b8585;
+    letter-spacing: 0.2px;
+}
+
+.beta_badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ccc;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+/* ── Page header ── */
+.page_header {
+    margin-bottom: 56px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.07);
+    padding-bottom: 32px;
+}
+
+.page_label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #555;
+    margin: 0 0 16px;
+}
+
+.page_title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #e8e8e8;
+    letter-spacing: -0.8px;
+    margin: 0 0 12px;
+    line-height: 1.2;
+}
+
+.page_subtitle {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.page_meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #555;
+}
+
+.page_meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.page_meta_dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #444;
+    display: inline-block;
+}
+
+/* ── Section ── */
+.section {
+    margin-bottom: 48px;
+}
+
+.section_title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin: 0 0 12px;
+    letter-spacing: -0.2px;
+}
+
+.section_number {
+    font-size: 11px;
+    font-weight: 600;
+    color: #444;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+}
+
+.section_body {
+    font-size: 14.5px;
+    color: #777;
+    line-height: 1.85;
+    margin: 0;
+}
+
+.section_body + .section_body {
+    margin-top: 12px;
+}
+
+/* ── Highlight card (for key facts) ── */
+.highlight_card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 0.5px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+}
+
+.highlight_card p {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.highlight_card strong {
+    color: #ccc;
+    font-weight: 500;
+}
+
+/* ── Data list (e.g. what we collect) ── */
+.data_list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.data_list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+}
+
+.data_list_icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #aaa;
+    font-size: 11px;
+}
+
+/* ── Divider ── */
+.divider {
+    height: 0.5px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 48px 0;
+}
+
+/* ── Footer ── */
+.page_footer {
+    border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page_footer_left {
+    font-size: 12px;
+    color: #444;
+}
+
+.page_footer_right {
+    display: flex;
+    gap: 20px;
+}
+
+.page_footer_link {
+    font-size: 12px;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.15s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 0;
+}
+
+.page_footer_link:hover {
+    color: #ccc;
+}
+
+/* ── Contact card ── */
+.contact_card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 0.5px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.contact_card p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.contact_card a {
+    font-size: 13px;
+    color: #ccc;
+    text-decoration: none;
+    border: 0.5px solid rgba(255, 255, 255, 0.12);
+    padding: 7px 14px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.contact_card a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .page_content {
+        padding: 48px 20px 80px;
+    }
+
+    .page_title {
+        font-size: 26px;
+    }
+
+    .page_footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
