@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../Styles/Home_page.module.css"
 import { LandingNavbar } from "../Components/Nav";
 import Hero_sec from "../assets/Hero_sec.png"
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export function Home_page(){
 
