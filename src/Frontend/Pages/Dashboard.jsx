@@ -11,7 +11,6 @@ import { DoorOpen, X, Upload, Phone, Store } from "lucide-react"
 import CreateStoreForm from "../Components/Creation_form.jsx"
 
 export function Dashboard(){
-
   const [store, setStore] = useState(null)
   const [active, setActive] = useState(false)
   const [update, setUpdate] = useState(false)
