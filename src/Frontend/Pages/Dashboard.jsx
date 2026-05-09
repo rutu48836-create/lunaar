@@ -32,6 +32,14 @@ export function Dashboard(){
   const { user, loading } = useAuth()
 
   useEffect(() => {
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN') {
+      window.history.replaceState({}, document.title, '/Dashboard')
+    }
+  })
+}, [])
+
+  useEffect(() => {
     if(loading || !user) return
     const check_store = async () => {
       const { data, error } = await supabase
