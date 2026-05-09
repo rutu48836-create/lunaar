@@ -25,19 +25,12 @@ export function Sign_In(){
  }
 
 const handleGoogleLogin = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-  })
-
-  if(error){
-    alert("failed to register")
-    return
+  supabase.auth.signInWithOAuth({
+  provider: 'google',
+  options: {
+    redirectTo: `${window.location.origin}/Dashboard`
   }
-
-  else{
-      navigate('/Dashboard')
-  }
-
+})
 }
 
  return (
