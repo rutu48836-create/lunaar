@@ -154,6 +154,8 @@ export function Dashboard(){
     reader.readAsDataURL(file)
   }
 
+  const name = user?.name
+
   return(
     <div className={styles.Dashboard_container}>
       <NavBar active={active} setActive={setActive}/>
@@ -172,7 +174,7 @@ export function Dashboard(){
             <div className={styles.store_content_wrapper}>
               <div className={styles.store_header}>
                 <div className={styles.store_greetings}>
-                  <h2>Good Morning</h2>
+                  <h2>Let's Grind</h2>
                   <span>See how your store is looking today</span>
                 </div>
                 <div className={styles.store_btns}>

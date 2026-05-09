@@ -64,7 +64,7 @@ box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 
 }
 
 .active_sidebar{
-    width: 16vw;
+    width: 20vw;
     height: 100vh;
     top: 0;
     z-index: 9999;
@@ -451,10 +451,11 @@ box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 
     }
 
     .active_sidebar{
-        width: 50vw;
-        position: absolute;
+        min-width: 60vw;
         z-index: 9999;
         height: 100vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
         top: 0;
         position: fixed;
     }

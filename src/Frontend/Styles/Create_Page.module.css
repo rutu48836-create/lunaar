@@ -9,7 +9,8 @@ body{
     display:flex;
     flex-direction:column;
     width:100vw;
-    min-height:100vh;
+    height:100vh;
+    position: fixed;
     gap: 0px;
     background: #0f0f0f;
     overflow-x: hidden;

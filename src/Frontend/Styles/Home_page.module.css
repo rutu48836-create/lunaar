@@ -137,6 +137,13 @@ object-fit: cover;
   .animation_wrapper{
     width: 100%;
     max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .animation_wrapper img{
+    width: 90%;
   }
 
  }

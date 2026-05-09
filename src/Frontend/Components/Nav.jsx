@@ -23,9 +23,9 @@ export function LandingNavbar() {
         </a>
 
         <div className={styles.links}>
-          <button className={styles.link} href="/About">About Us</button>
-          <button className={styles.link} href="/Contact">Contact Us</button>
-          <button className={styles.link} href="/policy">Policy</button>
+          <button className={styles.link} onClick={() => navigate('/About')}>About Us</button>
+          <button className={styles.link} onClick={() => navigate('/Contact')}>Contact Us</button>
+          <button className={styles.link} onClick={() => navigate('/policy')}>Policy</button>
    
         </div>
 
@@ -48,8 +48,8 @@ export function LandingNavbar() {
           ))}
           <div className={styles.mobileDivider} />
           <div className={styles.mobileActions}>
-            <button className={styles.ghost}>Sign in</button>
-            <button className={styles.primary}>Get started →</button>
+            <button className={styles.ghost} onClick={() => navigate('/Dashboard')}>Sign in</button>
+            <button className={styles.primary} onClick={() => navigate('/Dashboard')}>Get started →</button>
           </div>
         </div>
       )}

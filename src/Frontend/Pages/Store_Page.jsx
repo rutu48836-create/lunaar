@@ -173,11 +173,7 @@ export function Store_Page({setPage,store: storeProp,isPreview,store,pages,sideb
       {products.length === 0 && (
         <>
           <div className={styles.NO_PRODUCT}>
-            <h3>NO PRODUCTS TO DISPLAY :( 
-              {user && (
-              <a href="/Product-page">create</a>
-
-              )}</h3>
+            <h3>NO PRODUCTS TO DISPLAY :( </h3>
           </div>
         </>
       )}
@@ -271,11 +267,7 @@ return(
       {products.length === 0 && (
         <>
           <div className={styles.NO_PRODUCT}>
-            <h3>NO PRODUCTS TO DISPLAY :( 
-              {user && (
-              <a href="/Product-page">create</a>
-
-              )}</h3>
+            <h3>NO PRODUCTS TO DISPLAY :(</h3>
           </div>
         </>
       )}
