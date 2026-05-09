@@ -33,7 +33,7 @@ export function Dashboard(){
   useEffect(() => {
   supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN') {
-      window.history.replaceState({}, document.title, '/Dashboard')
+      navigate('/Dashboard', { replace: true })
     }
   })
 }, [])
