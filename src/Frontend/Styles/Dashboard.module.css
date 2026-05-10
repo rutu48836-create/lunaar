@@ -135,8 +135,6 @@ body{
     border-top-left-radius: 20px;
 }
 
-/* ─── Store Creation ─────────────────────────────── */
-
 .Store_creation_container{
     width: 100%;
     display: flex;
@@ -146,12 +144,33 @@ body{
     min-height: 100%;
     padding: 3rem 1rem 2rem;
     box-sizing: border-box;
+    gap: 0px;
+}
+
+.store_creation_header{
+    width: 100%;
+    height: auto;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    margin-top: -20px;
+}
+
+.store_creation_header a{
+
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: #757272;
 }
 
 .Store_creation_container h2{
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 200;
     margin: 0 0 6px;
+
     color: #171717;
 }
 
@@ -172,12 +191,23 @@ body{
     padding: 2rem;
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 4px 0px, rgba(27, 31, 35, 0.10) 0px 0px 0px 1px;
-    margin-top: 2rem;
+    margin-top: 0rem;
     border-radius: 16px;
     gap: 0;
 }
 
-/* ─── Form field wrapper ─────────────────────────── */
+.Store_creation_container h2{
+
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    bottom: 0;
+    font-weight: 580;
+        place-self: center;
+    margin: 0 auto;
+
+}
 
 .form_field{
     display: flex;
@@ -522,17 +552,25 @@ body{
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0;
-    padding-bottom: .8rem;
+    padding-bottom: 0rem;
+    padding-top: .4rem;
     gap:10px;
+    max-height: 50px;
+    margin-top: 20px;
 }
 
 .store_btns{
-    margin-right: 2px;
+    margin-right: 10px;
     gap: 6px;
+}
+
+.store_greetings{
+    display:none;
 }
 
 .store_greetings span{
     font-size: 11px;
+    display: none;
 }
 
 .store_greetings h2{
@@ -544,15 +582,20 @@ body{
     max-height: 80px;
 }
 
+.store_btns{
+    width: 100%;
+    max-width: 100%;
+}
+
 .store_btns button:first-child{
 
-    min-width: 108px;
+    min-width: 48%;
     font-size: 12.5px;
 
 }
 
 .store_btns button:last-child{
-    min-width: 108px;
+    min-width: 48%;
     font-size: 12.5px;
 }
 

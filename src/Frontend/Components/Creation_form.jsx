@@ -1,482 +1,413 @@
 import { useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Store, Link2, Upload, Phone, ChevronRight, ChevronLeft, Check, X } from "lucide-react"
+import { Upload, Phone, Store, ArrowRight, Check } from "lucide-react"
 
-const STEPS = ["Basic Info", "Branding", "Contact"]
+export default function CreateStoreForm({ onComplete }) {
+  const [storeName, setStoreName] = useState("")
+  const [whatsapp, setWhatsapp] = useState("")
+  const [logo, setLogo] = useState(null)
+  const [logoPreview, setLogoPreview] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [focused, setFocused] = useState(null)
+  const [submitted, setSubmitted] = useState(false)
+  const fileRef = useRef()
 
-const variants = {
-  enter: (dir) => ({ x: dir > 0 ? 40 : -40, opacity: 0 }),
-  center: { x: 0, opacity: 1 },
-  exit: (dir) => ({ x: dir > 0 ? -40 : 40, opacity: 0 }),
+  const handleLogoChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    setLogo(file)
+    const reader = new FileReader()
+    reader.onload = (ev) => setLogoPreview(ev.target.result)
+    reader.readAsDataURL(file)
+  }
+
+  const handleSubmit = async () => {
+    if (!storeName.trim() || loading) return
+    setLoading(true)
+    try {
+      await onComplete({ storeName, whatsapp, logo })
+      setSubmitted(true)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div style={styles.page}>
+      {/* Left accent bar */}
+      <div style={styles.accentBar} />
+
+      <div style={styles.card}>
+        {/* Header */}
+        <div style={styles.header}>
+          <div style={styles.iconWrap}>
+            <Store size={18} color="#fff" strokeWidth={1.8} />
+          </div>
+          <div>
+            <h2 style={styles.title}>Create your store</h2>
+            <p style={styles.subtitle}>Set up in under a minute</p>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div style={styles.divider} />
+
+        {/* Store Name */}
+        <div style={styles.field}>
+          <label style={styles.label}>Store Name</label>
+          <input
+            value={storeName}
+            onChange={(e) => setStoreName(e.target.value)}
+            placeholder="e.g. Zara's Boutique"
+            onFocus={() => setFocused("name")}
+            onBlur={() => setFocused(null)}
+            style={{
+              ...styles.input,
+              borderColor: focused === "name" ? "#171717" : "#e5e5e5",
+              background: focused === "name" ? "#fff" : "#fafafa",
+            }}
+          />
+        </div>
+
+        {/* WhatsApp */}
+        <div style={styles.field}>
+          <label style={styles.label}>WhatsApp Number</label>
+          <div style={{
+            ...styles.phoneRow,
+            borderColor: focused === "wa" ? "#171717" : "#e5e5e5",
+            background: focused === "wa" ? "#fff" : "#fafafa",
+          }}>
+            <div style={styles.phonePrefix}>
+              <Phone size={12} color="#a3a3a3" />
+              <span style={styles.prefixText}>+91</span>
+            </div>
+            <div style={styles.phoneDivider} />
+            <input
+              value={whatsapp}
+              onChange={(e) => setWhatsapp(e.target.value)}
+              placeholder="98765 43210"
+              type="tel"
+              onFocus={() => setFocused("wa")}
+              onBlur={() => setFocused(null)}
+              style={styles.phoneInput}
+            />
+          </div>
+          <span style={styles.hint}>Customers will contact you via WhatsApp</span>
+        </div>
+
+        <div style={styles.field}>
+          <label style={styles.label}>Store Logo</label>
+          <label
+            htmlFor="create-logo"
+            style={{
+              ...styles.uploadBox,
+              borderColor: focused === "logo" ? "#171717" : "#e5e5e5",
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = "#171717"}
+            onMouseLeave={(e) => e.currentTarget.style.borderColor = "#e5e5e5"}
+          >
+            {logoPreview ? (
+              <div style={styles.logoPreviewRow}>
+                <img src={logoPreview} alt="logo" style={styles.logoThumb} />
+                <div>
+                  <p style={styles.uploadTitle}>{logo?.name}</p>
+                  <p style={styles.uploadSub}>Click to replace</p>
+                </div>
+                <div style={styles.checkBadge}>
+                  <Check size={12} color="#fff" strokeWidth={2.5} />
+                </div>
+              </div>
+            ) : (
+              <div style={styles.uploadEmpty}>
+                <div style={styles.uploadIcon}>
+                  <Upload size={15} color="#a3a3a3" />
+                </div>
+                <div>
+                  <p style={styles.uploadTitle}>Upload your logo</p>
+                  <p style={styles.uploadSub}>PNG, JPG, SVG — max 5MB</p>
+                </div>
+              </div>
+            )}
+            <input
+              id="create-logo"
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleLogoChange}
+            />
+          </label>
+        </div>
+
+        <button
+          onClick={handleSubmit}
+          disabled={!storeName.trim() || loading}
+          style={{
+            ...styles.btn,
+            background: !storeName.trim() ? "#d4d4d4" : "#171717",
+            cursor: !storeName.trim() ? "not-allowed" : "pointer",
+          }}
+        >
+          {loading ? (
+            <span style={styles.btnInner}>
+              <span style={styles.spinner} /> Setting up...
+            </span>
+          ) : (
+            <span style={styles.btnInner}>
+              Launch Store <ArrowRight size={15} strokeWidth={2} />
+            </span>
+          )}
+        </button>
+
+        <p style={styles.footerNote}>
+          You can always update your store details later,you can add products later
+        </p>
+      </div>
+
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </div>
+  )
 }
 
-const s = {
+const styles = {
   page: {
-    minHeight: "100vh",
+    width: "100%",
+    minHeight: "100%",
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    paddingTop: "3rem",
+    paddingBottom: "3rem",
+    boxSizing: "border-box",
+    position: "relative",
+  },
+  accentBar: {
+    position: "absolute",
+    top: "3rem",
+    left: 0,
+    width: "3px",
+    height: "120px",
+    background: "linear-gradient(180deg, #171717 0%, transparent 100%)",
+    borderRadius: "0 4px 4px 0",
+  },
+  card: {
+    marginTop:"0px",
+    width: "100%",
+    maxWidth: "420px",
     background: "#fff",
+    borderRadius: "18px",
+    padding: "2rem",
+    boxSizing: "border-box",
+    boxShadow: "0 0 0 1px rgba(0,0,0,0.07), 0 4px 24px rgba(0,0,0,0.06)",
+    fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+  },
+  header: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+    marginBottom: "1.4rem",
+  },
+  iconWrap: {
+    width: "40px",
+    height: "40px",
+    background: "#171717",
+    borderRadius: "12px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "1rem",
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-    boxSizing: "border-box",
+    flexShrink: 0,
   },
-  inner: {
-    width: "100%",
-    maxWidth: "440px",
-  },
-  header: {
-    marginBottom: "2.5rem",
-  },
-  brand: {
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    marginBottom: "1.5rem",
-  },
-  brandText: {
-    fontSize: "11px",
-    fontWeight: 500,
-    color: "#a3a3a3",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-  },
-  h1: {
-    fontSize: "22px",
+  title: {
+    margin: 0,
+    fontSize: "17px",
     fontWeight: 600,
     color: "#171717",
-    letterSpacing: "-0.3px",
-    margin: 0,
+    letterSpacing: "-0.02em",
   },
-  stepLabel: {
-    fontSize: "13px",
+  subtitle: {
+    margin: "2px 0 0",
+    fontSize: "12px",
     color: "#a3a3a3",
-    marginTop: "4px",
   },
-  progressTrack: {
+  divider: {
     height: "1px",
     background: "#f0f0f0",
-    marginBottom: "2.5rem",
-    position: "relative",
-    overflow: "hidden",
+    marginBottom: "1.6rem",
   },
-  stepsRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    marginBottom: "2.5rem",
-  },
-  stepItem: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-  },
-  stepInner: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-  },
-  stepDivider: {
-    width: "24px",
-    height: "1px",
-    background: "#e5e5e5",
-  },
-  card: {
-    borderRadius: "16px",
-    border: "1px solid #f0f0f0",
-    padding: "2rem",
-    overflow: "hidden",
-    position: "relative",
-  },
-  fieldGroup: {
-    marginBottom: "2rem",
+  field: {
+    marginBottom: "1.4rem",
   },
   label: {
     display: "block",
     fontSize: "11px",
-    fontWeight: 500,
-    color: "#a3a3a3",
-    letterSpacing: "0.08em",
+    fontWeight: 600,
+    letterSpacing: "0.07em",
     textTransform: "uppercase",
+    color: "#a3a3a3",
     marginBottom: "8px",
+  },
+  optional: {
+    textTransform: "none",
+    fontWeight: 400,
+    letterSpacing: 0,
+    fontSize: "11px",
+    color: "#c0c0c0",
   },
   input: {
     width: "100%",
-    background: "transparent",
-    border: "none",
-    borderBottom: "1px solid #e5e5e5",
-    padding: "8px 0",
+    padding: "10px 14px",
+    border: "1px solid #e5e5e5",
+    borderRadius: "10px",
     fontSize: "14px",
     color: "#171717",
     outline: "none",
     boxSizing: "border-box",
     fontFamily: "inherit",
-    transition: "border-color 0.2s",
-    display:"flex",
-    alignItems:"Center",
-    justifyContent:"center"
+    transition: "border-color 0.18s, background 0.18s",
   },
-  prefixRow: {
+  phoneRow: {
     display: "flex",
-    alignItems: "flex-end",
-    borderBottom: "1px solid #e5e5e5",
-    transition: "border-color 0.2s",
+    alignItems: "center",
+    border: "1px solid #e5e5e5",
+    borderRadius: "10px",
+    overflow: "hidden",
+    transition: "border-color 0.18s, background 0.18s",
   },
-  prefixText: {
-    fontSize: "14px",
-    color: "#a3a3a3",
-    paddingBottom: "8px",
-    paddingRight: "2px",
-    whiteSpace: "nowrap",
+  phonePrefix: {
+    display: "flex",
+    alignItems: "center",
+    gap: "5px",
+    padding: "10px 12px",
     flexShrink: 0,
   },
-  prefixInput: {
+  prefixText: {
+    fontSize: "13px",
+    color: "#a3a3a3",
+    fontFamily: "inherit",
+  },
+  phoneDivider: {
+    width: "1px",
+    height: "20px",
+    background: "#e5e5e5",
+    flexShrink: 0,
+  },
+  phoneInput: {
     flex: 1,
-    background: "transparent",
     border: "none",
-    padding: "8px 0",
+    background: "transparent",
+    padding: "10px 12px",
     fontSize: "14px",
     color: "#171717",
     outline: "none",
     fontFamily: "inherit",
   },
-  slugHint: {
-    display: "flex",
-    alignItems: "center",
-    gap: "4px",
-    fontSize: "12px",
-    color: "#a3a3a3",
+  hint: {
+    display: "block",
     marginTop: "6px",
+    fontSize: "11px",
+    color: "#c0c0c0",
   },
-  dropzone: {
-    borderRadius: "12px",
+  uploadBox: {
+    display: "block",
     border: "1px dashed #e5e5e5",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "3.5rem 1rem",
-    gap: "12px",
+    borderRadius: "10px",
+    padding: "14px",
     cursor: "pointer",
-    transition: "border-color 0.2s, background 0.2s",
+    transition: "border-color 0.18s",
+    boxSizing: "border-box",
   },
-  uploadCircle: {
-    width: "40px",
-    height: "40px",
-    borderRadius: "50%",
+  uploadEmpty: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+  uploadIcon: {
+    width: "38px",
+    height: "38px",
     border: "1px solid #e5e5e5",
+    borderRadius: "10px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
+    background: "#fafafa",
   },
   uploadTitle: {
-    fontSize: "14px",
+    margin: 0,
+    fontSize: "13px",
     fontWeight: 500,
     color: "#404040",
-    margin: 0,
-    textAlign: "center",
   },
   uploadSub: {
-    fontSize: "12px",
-    color: "#a3a3a3",
     margin: "2px 0 0",
-    textAlign: "center",
+    fontSize: "11px",
+    color: "#a3a3a3",
   },
-  logoPreviewWrap: {
+  logoPreviewRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
     position: "relative",
-    display: "inline-block",
   },
-  logoImg: {
-    width: "80px",
-    height: "80px",
-    borderRadius: "50%",
+  logoThumb: {
+    width: "38px",
+    height: "38px",
+    borderRadius: "8px",
     objectFit: "cover",
     border: "1px solid #e5e5e5",
-    display: "block",
+    flexShrink: 0,
   },
-  removeBtn: {
+  checkBadge: {
     position: "absolute",
-    top: "-6px",
-    right: "-6px",
-    width: "20px",
-    height: "20px",
-    borderRadius: "50%",
+    right: 0,
+    top: "50%",
+    transform: "translateY(-50%)",
+    width: "22px",
+    height: "22px",
     background: "#171717",
-    border: "none",
-    cursor: "pointer",
+    borderRadius: "50%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: 0,
   },
-  hint: {
-    fontSize: "12px",
-    color: "#a3a3a3",
-    marginTop: "10px",
-  },
-  nav: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: "1.5rem",
-  },
-  backBtn: {
-    display: "flex",
-    alignItems: "center",
-    gap: "4px",
-    padding: "8px 14px",
-    fontSize: "13px",
-    fontWeight: 500,
-    color: "#737373",
-    background: "transparent",
-    border: "none",
-    cursor: "pointer",
-    fontFamily: "inherit",
-    transition: "color 0.15s",
-  },
-  nextBtn: {
-    display: "flex",
-    alignItems: "center",
-    gap: "4px",
-    padding: "10px 22px",
-    fontSize: "13px",
-    fontWeight: 500,
-    color: "#fff",
-    background: "#171717",
-    border: "none",
+  btn: {
+    width: "100%",
+    padding: "12px",
     borderRadius: "10px",
-    cursor: "pointer",
+    border: "none",
+    fontSize: "14px",
+    fontWeight: 600,
+    color: "#fff",
     fontFamily: "inherit",
-    transition: "background 0.15s",
+    transition: "background 0.18s, transform 0.1s",
+    letterSpacing: "-0.01em",
+    marginTop: "0.4rem",
   },
-}
-
-export default function CreateStoreForm({ onComplete }) {
-  const [step, setStep] = useState(0)
-  const [dir, setDir] = useState(1)
-  const [logoPreview, setLogoPreview] = useState(null)
-  const [dragging, setDragging] = useState(false)
-  const [focusedField, setFocusedField] = useState(null)
-  const fileRef = useRef()
-
-  const [form, setForm] = useState({
-    storeName: "",
-    slug: "",
-    logo: null,
-    whatsapp: "",
-  })
-
-  const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
-
-  const goNext = () => { setDir(1); setStep((s) => Math.min(s + 1, STEPS.length - 1)) }
-  const goBack = () => { setDir(-1); setStep((s) => Math.max(s - 1, 0)) }
-
-  const handleLogoFile = (file) => {
-    if (!file || !file.type.startsWith("image/")) return
-    setForm((f) => ({ ...f, logo: file }))
-    const reader = new FileReader()
-    reader.onload = (e) => setLogoPreview(e.target.result)
-    reader.readAsDataURL(file)
-  }
-
-  const handleDrop = (e) => {
-    e.preventDefault()
-    setDragging(false)
-    handleLogoFile(e.dataTransfer.files[0])
-  }
-
-  const progress = ((step + 1) / STEPS.length) * 100
-
-  return (
-    <div style={s.page}>
-      <div style={s.inner}>
-
-        {/* Header */}
-        <div style={s.header}>
-          <div style={s.brand}>
-            <Store size={15} color="#171717" />
-            <span style={s.brandText}>lunaar</span>
-          </div>
-          <h1 style={s.h1}>Create your store</h1>
-          <p style={s.stepLabel}>Step {step + 1} of {STEPS.length} — {STEPS[step]}</p>
-        </div>
-
-        {/* Progress bar */}
-        <div style={s.progressTrack}>
-          <motion.div
-            style={{ position: "absolute", top: 0, left: 0, height: "100%", background: "#171717" }}
-            initial={false}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </div>
-
-        {/* Step dots */}
-        <div style={s.stepsRow}>
-          {STEPS.map((label, i) => (
-            <div key={i} style={s.stepItem}>
-              <div style={s.stepInner}>
-                <motion.div
-                  animate={{ background: i <= step ? "#171717" : "#e5e5e5", scale: i === step ? 1.15 : 1 }}
-                  transition={{ duration: 0.2 }}
-                  style={{ width: "20px", height: "20px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
-                >
-                  {i < step
-                    ? <Check size={10} color="#fff" strokeWidth={3} />
-                    : <span style={{ fontSize: "9px", fontWeight: 600, color: i === step ? "#fff" : "#a3a3a3" }}>{i + 1}</span>
-                  }
-                </motion.div>
-                <span style={{ fontSize: "12px", color: i === step ? "#171717" : "#a3a3a3", fontWeight: i === step ? 500 : 400 }}>
-                  {label}
-                </span>
-              </div>
-              {i < STEPS.length - 1 && <div style={s.stepDivider} />}
-            </div>
-          ))}
-        </div>
-
-        {/* Card */}
-        <div style={s.card}>
-          <AnimatePresence custom={dir} mode="wait">
-            <motion.div
-              key={step}
-              custom={dir}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.28, ease: "easeInOut" }}
-            >
-
-              {/* Step 1 */}
-              {step === 0 && (
-                <div>
-                  <div style={s.fieldGroup}>
-                    <label style={s.label}>Store Name</label>
-                    <input
-                      style={{ ...s.input, borderBottomColor: focusedField === "storeName" ? "#171717" : "#e5e5e5" }}
-                      placeholder="e.g. Mumbai Spices"
-                      value={form.storeName}
-                      onChange={set("storeName")}
-                      onFocus={() => setFocusedField("storeName")}
-                      onBlur={() => setFocusedField(null)}
-                    />
-                  </div>
-
-                  <div style={s.fieldGroup}>
-                    <label style={s.label}>Store URL</label>
-                    <div style={{ ...s.prefixRow, borderBottomColor: focusedField === "slug" ? "#171717" : "#e5e5e5" }}>
-                      <span style={s.prefixText}>lunaar.com/</span>
-                      <input
-                        style={s.prefixInput}
-                        placeholder="your-store-name"
-                        value={form.slug}
-                        onChange={(e) => setForm((f) => ({
-                          ...f,
-                          slug: e.target.value.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
-                        }))}
-                        onFocus={() => setFocusedField("slug")}
-                        onBlur={() => setFocusedField(null)}
-                      />
-                    </div>
-                    {form.slug && (
-                      <div style={s.slugHint}>
-                        <Link2 size={10} />
-                        lunaar.com/{form.slug}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 2 */}
-              {step === 1 && (
-                <div>
-                  <label style={s.label}>Store Logo</label>
-                  <div
-                    onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
-                    onDragLeave={() => setDragging(false)}
-                    onDrop={handleDrop}
-                    onClick={() => fileRef.current.click()}
-                    style={{ ...s.dropzone, borderColor: dragging ? "#171717" : "#e5e5e5", background: dragging ? "#fafafa" : "transparent" }}
-                  >
-                    <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => handleLogoFile(e.target.files[0])} />
-                    {logoPreview ? (
-                      <div style={s.logoPreviewWrap}>
-                        <img src={logoPreview} alt="logo" style={s.logoImg} />
-                        <button
-                          style={s.removeBtn}
-                          onClick={(e) => { e.stopPropagation(); setLogoPreview(null); setForm((f) => ({ ...f, logo: null })) }}
-                        >
-                          <X size={10} color="#fff" />
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <div style={s.uploadCircle}>
-                          <Upload size={14} color="#a3a3a3" />
-                        </div>
-                        <div>
-                          <p style={s.uploadTitle}>Drop your logo here</p>
-                          <p style={s.uploadSub}>or click to browse — PNG, JPG, SVG</p>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3 */}
-              {step === 2 && (
-                <div>
-                  <label style={s.label}>WhatsApp Number</label>
-                  <div style={{ ...s.prefixRow, borderBottomColor: focusedField === "whatsapp" ? "#171717" : "",display:"flex",alignItems:"center"}}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "6px", paddingBottom: "8px", paddingRight: "8px", flexShrink: 0,justifyContent:"center" }}>
-                      <Phone size={12} color="#a3a3a3" />
-                      <span style={s.prefixText}>+91</span>
-                    </div>
-                    <input
-                      style={s.prefixInput}
-                      placeholder=""
-                      type="tel"
-                      value={form.whatsapp}
-                      onChange={set("whatsapp")}
-                      onFocus={() => setFocusedField("whatsapp")}
-                      onBlur={() => setFocusedField(null)}
-                    />
-                  </div>
-                  <p style={s.hint}>Customers will contact you via WhatsApp to place orders.</p>
-                </div>
-              )}
-
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Navigation */}
-        <div style={s.nav}>
-          <button
-            onClick={goBack}
-            style={{ ...s.backBtn, opacity: step === 0 ? 0 : 1, pointerEvents: step === 0 ? "none" : "auto" }}
-          >
-            <ChevronLeft size={14} />
-            Back
-          </button>
-
-          {step < STEPS.length - 1 ? (
-            <button onClick={goNext} style={s.nextBtn}>
-              Continue
-              <ChevronRight size={14} />
-            </button>
-          ) : (
-            <button onClick={() => onComplete?.(form)} style={s.nextBtn}>
-              Create Store
-              <Check size={14} />
-            </button>
-          )}
-        </div>
-
-      </div>
-    </div>
-  )
+  btnInner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+  },
+  spinner: {
+    display: "inline-block",
+    width: "13px",
+    height: "13px",
+    border: "2px solid rgba(255,255,255,0.3)",
+    borderTopColor: "#fff",
+    borderRadius: "50%",
+    animation: "spin 0.7s linear infinite",
+  },
+  footerNote: {
+    textAlign: "center",
+    fontSize: "11px",
+    color: "#c0c0c0",
+    marginTop: "14px",
+    marginBottom: 0,
+  },
 }

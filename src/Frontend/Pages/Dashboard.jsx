@@ -7,7 +7,7 @@ import { nanoid } from "nanoid"
 import { NavBar } from "../Components/Sidebar.jsx"
 import {Store_Page_Content_Wrapper} from "./Store_Page.jsx"
 import { useAuth } from "../Components/AuthContext.jsx"
-import { DoorOpen, X, Upload, Phone, Store } from "lucide-react"
+import { DoorOpen, X, Upload, Phone, Store, SendHorizonal } from "lucide-react"
 import CreateStoreForm from "../Components/Creation_form.jsx"
 
 export function Dashboard(){
@@ -166,6 +166,11 @@ export function Dashboard(){
 
           {!loading && !store && (
             <div className={styles.Store_creation_container}>
+         <div className={styles.store_creation_header}>     
+          <h2>Lunaar<SendHorizonal size={26}/></h2>
+
+          <a href="/Contact">Help?</a>
+          </div>
               <CreateStoreForm onComplete={(data) => Handle_Creation(data)} />
             </div>
           )}
