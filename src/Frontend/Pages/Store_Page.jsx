@@ -143,8 +143,9 @@ function Image_Slider({ images }){
   )
 }
 
-export function Store_Page({setPage,store: storeProp,isPreview,store,pages,sidebar_active,setSidebar_active,products,details}){
+export function Store_Page({setPage,store: storeProp,product_details,isPreview,store,pages,sidebar_active,setSidebar_active,products,setProduct_Details}){
 
+  const [details,setDetails] = useState(false)
 
   const { token } = useParams()
   const { user, loading } = useAuth()
@@ -409,7 +410,7 @@ useEffect(() => {
 
   return(
     <>
-      {resolvedTheme === "default" && <Store_Page store={store} isPreview={isPreview} pages={pages} setPages={setPages} sidebar_active={sidebar_active} products={products} details={details}/>}
+      {resolvedTheme === "default" && <Store_Page store={store} isPreview={isPreview} pages={pages} setPages={setPages} sidebar_active={sidebar_active} products={products} details={details} setProduct_Details={setProduct_Details} product_details={product_details}/>}
       {resolvedTheme === "modern" && <Store_Page_Modern store={store} pages={pages} setPages={setPages} sidebar_active={sidebar_active} products={products} details={details} setDetails={setDetails} isPreview={isPreview}/>}
     </>
   )

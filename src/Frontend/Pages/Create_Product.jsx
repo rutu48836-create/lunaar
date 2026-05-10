@@ -121,6 +121,8 @@ setFiles(prev => {
    alert('success')
 
    setName(''); setPrice(0); setDescription(''); setFiles([]);
+
+   setNew_product(false)
   
   }catch(error){
     console.log(error)
