@@ -948,6 +948,7 @@ html,body{
         justify-content:center;
         max-width: 90%;
         align-items: center;
+        min-height: auto;
     }
 
     .Products_list_modern_preview{
