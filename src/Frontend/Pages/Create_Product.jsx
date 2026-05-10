@@ -4,6 +4,7 @@ import { Sidebar } from "../Components/Sidebar.jsx";
 import styles from "../Styles/Create_Product.module.css";
 import { supabase } from "../Components/supabase.js";
 import { NavBar } from "../Components/Sidebar.jsx";
+import {Plus} from "lucide-react"
 
     function Main_Content() {
 
@@ -245,7 +246,7 @@ const deleteProduct = async (product) => {
       setNew_product(true)
       
       
-      }}>new product</button>
+      }}>new product <Plus size={20}/></button>
 </div>
 </div>
 

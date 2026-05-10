@@ -185,10 +185,15 @@ textarea{
 }
 
 .header_btn_wrapper button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 20px;
     padding: .8rem;
+    text-align: center;
     width: 150px;
     border: none;
+    gap: 6px;
     background: #000;
     color: #fff;
     font-family: "Inter",sans-serif;
@@ -321,6 +326,11 @@ textarea{
     display: flex;
    }
 
+   .header_btn_wrapper button {
+    display: flex;
+    align-items: center;
+   }
+
    .New_Product_Wrapper{
     padding: 0;
     padding-left: 0;
@@ -347,6 +357,7 @@ textarea{
 }
 
 .New_product_header h2{
+    margin-top: 30px;
     margin-left: 10px;
 }
 
