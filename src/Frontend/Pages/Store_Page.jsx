@@ -251,7 +251,7 @@ return(
       <Store_Header store={store} pages={pages} sidebar_active={sidebar_active} setSidebar_active={setSidebar_active} modernTheme={modernTheme}/>
 
     {store?.banner_url && (
-<div className={styles.Store_Banner} style={{fontFamily:"PT Serif, serif"}}>
+<div className={styles.Store_Banner} style={{fontFamily:"DM serif, serif",fontWeight:"200"}}>
         <img src={store?.banner_url} alt="Store Banner" className={styles.banner_img}/>
         <div className={styles.banner_overlay}>
          <h1>{store?.name}</h1>

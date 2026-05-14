@@ -60,11 +60,12 @@ body{
 .New_Product_form_wrapper{
     width:100vw;
     height: 100vh;
-    position: fixed;
+    min-height: 0;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    overflow-x: hidden;
 }
 
 .New_Product_form{
@@ -76,11 +77,11 @@ body{
     align-items: flex-start;
     padding: .6rem;
     min-height: 0;  
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;    
+    margin-top: 20px;
     border-radius: 12px;
     overflow-y: scroll;
-    scrollbar-width: thin;
-    background: #fff;
+    scrollbar-width: thin;    
 }
 
 label{
@@ -294,6 +295,10 @@ textarea{
     color: #111;
     font-weight: 500;
     transition: background 0.15s ease;
+}
+
+.btn_wrapper button:first-child{
+    display: none;
 }
 
 .btn_wrapper button:first-child:hover {
