@@ -11,11 +11,15 @@ export function Store_Header({store,page,setPage,pages,sidebar_active,setSidebar
 
   const {slug,token} = useParams();
   const navigate = useNavigate()
+  const [header_links,setLinks] = useState(false)
 
-  return(
+return (
+  <>
     <div className={`${styles.Store_preview_Header} ${modernTheme ? styles.Store_preview_Header_modern : ""}`}>
       <div className={styles.Store_preview_Header_info}>
-        <img src={store?.logo_url} alt="Store logo" style={{width:"35px",height:"35px"}}/> <h3>{store?.name}</h3>
+        <img src={store?.logo_url} alt="Store logo" style={{width:"35px",height:"35px"}}/>
+        <button onClick={() => setLinks(true)}><Menu size={18}/></button>
+        <h3>{store?.name}</h3>
       </div>
 
       <div className={styles.store_links}>
@@ -28,17 +32,60 @@ export function Store_Header({store,page,setPage,pages,sidebar_active,setSidebar
         </ul>
       </div>
 
-      
-       <div className={styles.header_btn}>
-         <a href={`https://wa.me/91${store?.whatsapp_number}`} target="_blank" rel="noreferrer">
-           <button>Support</button>
-         </a>
-       </div>
+      <div className={styles.header_btn}>
+        <a href={`https://wa.me/91${store?.whatsapp_number}`} target="_blank" rel="noreferrer">
+          <button>Support</button>
+        </a>
+      </div>
     </div>
 
+    {header_links && (
+      <>
+        <div className={styles.links_backdrop} onClick={() => setLinks(false)}/>
+        <div className={styles.links_wrapper}>
+          <div className={styles.links_header}>
+            <div className={styles.links_header_brand}>
+              <img src={store?.logo_url} alt="logo" className={styles.links_logo}/>
+              <h2>{store?.name}</h2>
+            </div>
+            <button className={styles.links_close_btn} onClick={() => setLinks(false)}>
+              <X size={18}/>
+            </button>
+          </div>
 
+          <div className={styles.links_divider}/>
 
-  )
+          <nav className={styles.links_nav}>
+            <p className={styles.links_nav_label}>Pages</p>
+            <ul className={styles.links_list}>
+              {pages?.map((p) => (
+                <li key={p?.slug} className={styles.links_item} onClick={() => {
+                  navigate(`/page/${token}/${p?.slug}`)
+                  setLinks(false)
+                }}>
+                  {p?.title}
+                </li>
+              ))}
+
+              {pages.length === 0 && <h2>no links</h2>}
+            </ul>
+          </nav>
+
+          <div className={styles.links_footer}>
+            <a
+              href={`https://wa.me/91${store?.whatsapp_number}`}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.links_whatsapp}
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </>
+    )}
+  </>
+)
 
 }
 
@@ -169,7 +216,7 @@ export function Store_Page({setPage,store: storeProp,product_details,isPreview,s
       </div>
     )}  
       <div className={styles.Featured_products}/>
-      <h3 id="products" className={styles.Our_products_title}>Our Products</h3>
+      <h3 id="products" className={styles.Our_products_title}>Featured Products</h3>
 
       {products.length === 0 && (
         <>
@@ -254,16 +301,16 @@ return(
 <div className={styles.Store_Banner} style={{fontFamily:"DM serif, serif",fontWeight:"200"}}>
         <img src={store?.banner_url} alt="Store Banner" className={styles.banner_img}/>
         <div className={styles.banner_overlay}>
-         <h1>{store?.name}</h1>
-         <p>{store?.description || "Shop our latest collection"}</p>
-           <button onClick={() => document.querySelector('#products').scrollIntoView({behavior:'smooth'})}>
+         <h1 style={{fontFamily: "Barlow Semi Condensed, sans-serif"}}>{store?.name}</h1>
+         <p style={{fontFamily: "Barlow Semi Condensed, sans-serif"}}>{store?.description || "Shop our latest collection"}</p>
+           <button style={{fontFamily: "Barlow Semi Condensed, sans-serif"}} onClick={() => document.querySelector('#products').scrollIntoView({behavior:'smooth'})}>
       Shop Now
     </button>
           </div>
       </div>
     )}  
       <div className={styles.Featured_products}/>
-      <h3 id="products" className={ ` ${styles.Our_products_title} ${modernTheme ? styles.Our_products_title_modern : ""}`}>Our Products</h3>
+      <h3 id="products" className={ ` ${styles.Our_products_title} ${modernTheme ? styles.Our_products_title_modern : ""}`}>Featured Products</h3>
 
       {products.length === 0 && (
         <>
